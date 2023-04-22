@@ -8,7 +8,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/dbus:/var/run/dbus
       - /var/run/docker.sock:/var/run/docker.sock
-      - /sys/class/hwmon/hwmon1/temp1_input:/sys/class/thermal/thermal_zone0/temp:ro
     privileged: true
     environment:
       - TZ=Europe/Amsterdam
