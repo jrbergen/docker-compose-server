@@ -7,7 +7,7 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /opt/mosquitto/:/mosquitto
+      - /opt/mosquitto:/mosquitto
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 1883:1883
