@@ -16,15 +16,9 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - type: volume
-        source: /opt/mosquitto/config/
-        target: /mosquitto/config/
-      - type: volume
-        source: /opt/mosquitto/log/
-        target: /mosquitto/log/
-      - type: volume
-        source: /opt/mosquitto/data
-        target: /mosquitto/data/
+      - /opt/mosquitto/config/:/mosquitto/config/
+      - /opt/mosquitto/log/:/mosquitto/log/
+      - /opt/mosquitto/data:/mosquitto/data/
     restart: unless-stopped
 
 volumes:
