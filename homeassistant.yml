@@ -11,6 +11,7 @@ services:
     privileged: true
     environment:
       - TZ=Europe/Amsterdam
+      - env_file=/opt/.env
     restart: unless-stopped
     network_mode: host
     healthcheck:
@@ -18,3 +19,16 @@ services:
       interval: 90s
       timeout: 60s
       retries: 2
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    environment:
+      - TZ=Europe/Amsterdam
+      - env_file=/opt/.env
+    volumes:
+      - /opt/mosquitto:/mosquitto
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 1883:1883
+      - 9001:9001
+    restart: unless-stopped
