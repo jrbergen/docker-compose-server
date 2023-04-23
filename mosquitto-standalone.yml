@@ -6,10 +6,12 @@ services:
     image: eclipse-mosquitto
     environment:
       - TZ=Europe/Amsterdam
+      - env_file=/opt/.env
     volumes:
       - /opt/mosquitto:/mosquitto
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 1883:1883
       - 9001:9001
+      - 8883:8883
     restart: unless-stopped
