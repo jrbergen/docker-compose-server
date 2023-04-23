@@ -18,6 +18,3 @@ services:
       interval: 90s
       timeout: 60s
       retries: 2
-    env_file:
-      - /opt/.env
-
