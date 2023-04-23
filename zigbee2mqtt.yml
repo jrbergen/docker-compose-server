@@ -1,0 +1,16 @@
+services: 
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    depends_on:
+      - mosquitto
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - /opt/zigbee2mqtt/data:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+    # Frontend port
+      - 8080:8080
+    device:
+      - /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220816201023-if00:/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220816201023-if00
+    restart: unless-stopped
+    privileged: true
