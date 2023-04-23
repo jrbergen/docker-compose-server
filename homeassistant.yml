@@ -3,11 +3,22 @@ services:
     container_name: HomeAssistant
     image: homeassistant/home-assistant:stable
     volumes:
-      - /opt/homeassistant:/config
-      - /opt/hass/config:/config
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/dbus:/var/run/dbus
-      - /var/run/docker.sock:/var/run/docker.sock
+      - type: volume
+        source: /opt/homeassistant
+        target: /config
+      - type: volume
+        source: /opt/hass/config
+        target: /config
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+      - type: bind
+        source: /var/run/dbus
+        target: /var/run/dbus
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
     privileged: true
     environment:
       - TZ=Europe/Amsterdam
