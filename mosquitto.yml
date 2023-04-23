@@ -1,14 +1,32 @@
+version: '3.7'
+
 services:
   mosquitto:
     container_name: mqtt
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:latest
     ports:
-      - “1883:1883”
-      - “9001:9001”
+      - target: 1883
+        published: 1883
+        protocol: tcp
+        mode: host
+      - target: 9001
+        published: 9001
+        protocol: tcp
+        mode: host
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /opt/mosquitto/config:/mosquitto/config
-      - /opt/mosquitto/data:/mosquitto/data
-      - /opt/mosquitto/log:/mosquitto/log
+      - type: bind
+        source: /opt/mosquitto/config/
+        target: /mosquitto/config/
+      - type: bind
+        source: /opt/mosquitto/log/
+        target: /mosquitto/log/
+      - type: volume
+        source: /opt/mosquitto/data
+        target: /mosquitto/data/
     restart: unless-stopped
+
+volumes:
+  data:
+    name: "mqtt-broker-data"
